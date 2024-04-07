@@ -20,6 +20,7 @@ const Dashboard = () => {
     fetchAllProjects();
   }, [])
 
+
   /* async function fetchProjects(){
     const response = await fetch('/api/fetch-projects', {
       mathod: "GET",

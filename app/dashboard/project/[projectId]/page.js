@@ -33,23 +33,24 @@ export default function Project() {
   
     } */
 
-  async function fetchProject() {
-    const formData = new FormData();
-    formData.append('projectId', params.projectId)
-    const response = await fetch('/api/fetch-this-project', {
-      method: "POST",
-      body: formData
-    })
-    const fetchedProject = JSON.parse(await response.json())
-    setProject(fetchedProject)
-    setTitle(fetchedProject.title)
-  }
-
   function updateTitle(event) {
     socket.emit("title update", document.getElementById('title').value, params.projectId)
   }
 
   useEffect(() => {
+
+    async function fetchProject() {
+      const formData = new FormData();
+      formData.append('projectId', params.projectId)
+      const response = await fetch('/api/fetch-this-project', {
+        method: "POST",
+        body: formData
+      })
+      const fetchedProject = JSON.parse(await response.json())
+      setProject(fetchedProject)
+      setTitle(fetchedProject.title)
+    }
+
     fetchProject();
     const getUsername = document?.cookie.split("; ").find((row) => row.startsWith("username="))?.split("=")[1];
     setUsername(getUsername)
