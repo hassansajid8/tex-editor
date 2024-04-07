@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Users {
+  created_at DateTime   @default(now()) @db.Timestamptz(6)
+  username   String     @unique(map: "Users_name_key")
+  password   String     @db.VarChar
+  id         String     @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  Projects   Projects[]
+
+  @@id([id, username])
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model Projects {
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  title     String
+  body      String?
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdBy String?
+  Users     Users?   @relation(fields: [createdBy], references: [username], onDelete: NoAction, onUpdate: NoAction, map: "public_Projects_createdBy_fkey")
+}

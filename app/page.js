@@ -1,95 +1,37 @@
+'use client'
+
 import Image from "next/image";
-import styles from "./page.module.css";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import { useState } from "react";
 
 export default function Home() {
+  const [isRegister, setIsRegister] = useState(false); 
+
+  function toggleLoginRegister(){
+    if(isRegister){
+      setIsRegister(false)
+    }
+    else{
+      setIsRegister(true)
+    }
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="md:flex container mx-auto px-18 py-10 font-sans h-screen">
+      <div className="container md:w-1/2 py-5 text-white bg-dblue">
+        <div className="text-left mx-auto container w-2/3">
+        <div className="w-min my-5 italic mb-5 mt-20 flex items-baseline mx-auto md:text-5xl text-3xl">
+            <h1 className="font-black">TEX</h1>
+            <h1 className="">EDITOR</h1>
+        </div>
+          <p className="w-3/4 mx-auto text-center">A simple web-based collaborative text editor</p>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="container md:w-1/2 text-blue">
+        {isRegister ? <div className="container flex flex-col"><Register /><button className="my-5 w-fit mx-auto" onClick={toggleLoginRegister}>Login to existing account</button></div> : <div className="container flex flex-col"><Login /><button className="my-5 w-fit mx-auto" onClick={toggleLoginRegister}>Create a new account</button></div>}     
       </div>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
     </main>
   );
 }
