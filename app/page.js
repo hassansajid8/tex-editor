@@ -19,13 +19,16 @@ export default function Home() {
 
   return (
     <main className="md:flex container mx-auto px-18 py-10 font-sans h-screen">
-      <div className="container md:w-1/2 py-5 text-white bg-dblue">
+      <div id="intro" className="container md:w-1/2 py-5 text-white bg-dblue">
         <div className="text-left mx-auto container w-2/3">
         <div className="w-min my-5 italic mb-5 mt-20 flex items-baseline mx-auto md:text-5xl text-3xl">
             <h1 className="font-black">TEX</h1>
             <h1 className="">EDITOR</h1>
         </div>
           <p className="w-3/4 mx-auto text-center">A simple web-based collaborative text editor</p>
+        </div>
+        <div>
+
         </div>
       </div>
       <div className="container md:w-1/2 text-blue">
